@@ -20,6 +20,23 @@ body {
   font-weight: 700;
 }
 
+.header-content {
+  gap: 12px;
+}
+
+.header-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.wwin-header-bar .small {
+  color: #f2f2f2;
+}
+
 .tab-disabled {
   pointer-events: none;
   opacity: 0.5;
@@ -68,6 +85,10 @@ body {
   align-items: center;
   gap: 6px;
   font-weight: 500;
+}
+
+.js-radio-group.is-invalid + .invalid-feedback {
+  display: block;
 }
 
 .badge-type {

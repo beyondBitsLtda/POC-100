@@ -1,5 +1,4 @@
 $(function () {
-  var formAttempted = false;
   var $tabs = $('#pocTabs .nav-link');
   var $addButton = $('#btn-adicionar');
   var $modal = $('#modal-sucesso');
@@ -18,53 +17,80 @@ $(function () {
   }
 
   function getSelectedTipo() {
-    var selected = $('input[name="tipo_registro"]:checked').val();
-    return selected || '';
+    return $('input[name="tipo_registro"]:checked').val() || '';
   }
 
-  function isFieldFilled(field) {
-    var $field = $(field);
+  function isFieldFilled($field) {
     if ($field.attr('type') === 'radio') {
       var group = $field.attr('name');
       return $('input[name="' + group + '"]:checked').length > 0;
     }
+    if ($field.attr('type') === 'number') {
+      return Number($field.val()) > 0;
+    }
     return ($field.val() || '').toString().trim().length > 0;
   }
 
-  function validateField(field, force) {
-    var $field = $(field);
-    var isRequired = $field.hasClass('js-required');
-    if (!isRequired) {
-      return true;
-    }
+  function markTouched($field) {
+    $field.data('touched', 'true');
+  }
 
+  function isTouched($field) {
+    return $field.data('touched') === 'true';
+  }
+
+  function validateField($field, showInvalid) {
     var group = $field.data('group');
     if (group) {
       var groupFilled = $('input[name="' + group + '"]:checked').length > 0;
-      $field.closest('.js-radio-group').toggleClass('is-invalid', force && !groupFilled);
+      if (showInvalid) {
+        $field.closest('.js-radio-group').toggleClass('is-invalid', !groupFilled);
+      }
       return groupFilled;
     }
 
-    var filled = isFieldFilled(field);
-    if (force) {
+    var filled = isFieldFilled($field);
+    if (showInvalid) {
       $field.toggleClass('is-invalid', !filled);
     }
     return filled;
   }
 
-  function validateScope(scope, force) {
-    var isValid = true;
+  function validateScope(scope, showInvalid) {
+    var valid = true;
+    var validatedGroups = {};
     $('.js-required[data-scope="' + scope + '"]').each(function () {
-      if (!validateField(this, force)) {
-        isValid = false;
+      var $field = $(this);
+      var group = $field.data('group');
+      if (group) {
+        if (validatedGroups[group]) {
+          return;
+        }
+        validatedGroups[group] = true;
+      }
+      var shouldShow = showInvalid || isTouched($field);
+      if (!validateField($field, shouldShow)) {
+        valid = false;
       }
     });
-    return isValid;
+    return valid;
+  }
+
+  function validateDadosBasicos(showInvalid) {
+    return validateScope('basic', showInvalid);
+  }
+
+  function validateAbaInsegura(showInvalid) {
+    return validateScope('unsafe', showInvalid);
+  }
+
+  function validateAbaSegura(showInvalid) {
+    return validateScope('safe', showInvalid);
   }
 
   function updateTabsState() {
-    var basicValid = validateScope('basic', formAttempted);
     var tipo = getSelectedTipo();
+    var basicValid = validateDadosBasicos(false);
 
     if (basicValid && tipo === 'insegura') {
       setTabEnabled('inseguras', true);
@@ -79,36 +105,43 @@ $(function () {
 
     var activeTab = $('#pocTabs .nav-link.active').data('tab');
     if (activeTab !== 'basicos') {
-      if ((activeTab === 'inseguras' && tipo !== 'insegura') || (activeTab === 'seguras' && tipo !== 'segura')) {
+      if ((activeTab === 'inseguras' && tipo !== 'insegura') || (activeTab === 'seguras' && tipo !== 'segura') || !basicValid) {
         activateTab('basicos');
       }
     }
   }
 
-  function updateAddButton() {
-    var basicValid = validateScope('basic', formAttempted);
+  function updateAdicionarButton() {
+    var basicValid = validateDadosBasicos(false);
     var tipo = getSelectedTipo();
     var otherValid = false;
 
     if (tipo === 'insegura') {
-      otherValid = validateScope('unsafe', formAttempted);
+      otherValid = validateAbaInsegura(false);
     } else if (tipo === 'segura') {
-      otherValid = validateScope('safe', formAttempted);
+      otherValid = validateAbaSegura(false);
     }
 
     $addButton.prop('disabled', !(basicValid && otherValid));
   }
 
+  function touchAllRequired() {
+    $('.js-required').each(function () {
+      markTouched($(this));
+    });
+  }
+
   function resetForm() {
     $('#poc-form')[0].reset();
-    $('.js-required').removeClass('is-invalid');
+    $('.js-required').removeClass('is-invalid').removeData('touched');
+    $('.js-radio-group').removeClass('is-invalid');
     $('#lista-praticas .list-group-item').removeClass('active');
     $('#praticaSelecionada').val('');
-    formAttempted = false;
     setTabEnabled('inseguras', false);
     setTabEnabled('seguras', false);
     activateTab('basicos');
-    updateAddButton();
+    updateTabsState();
+    updateAdicionarButton();
   }
 
   $tabs.on('click', function (event) {
@@ -124,23 +157,33 @@ $(function () {
   $('#lista-praticas .list-group-item').on('click', function () {
     $('#lista-praticas .list-group-item').removeClass('active');
     $(this).addClass('active');
-    $('#praticaSelecionada').val($(this).data('value'));
-    validateField(document.getElementById('praticaSelecionada'), true);
-    updateAddButton();
+    var $hidden = $('#praticaSelecionada');
+    $hidden.val($(this).data('value'));
+    markTouched($hidden);
+    validateField($hidden, true);
+    updateAdicionarButton();
   });
 
   $('.js-required').on('blur', function () {
-    validateField(this, true);
+    var $field = $(this);
+    markTouched($field);
+    validateField($field, true);
     updateTabsState();
-    updateAddButton();
+    updateAdicionarButton();
   });
 
   $('.js-required').on('change keyup', function () {
-    if (formAttempted) {
-      validateField(this, true);
+    var $field = $(this);
+    if ($field.attr('type') === 'radio') {
+      $('input[name="' + $field.attr('name') + '"]').each(function () {
+        markTouched($(this));
+      });
+    } else {
+      markTouched($field);
     }
+    validateField($field, isTouched($field));
     updateTabsState();
-    updateAddButton();
+    updateAdicionarButton();
   });
 
   $('#btn-cancelar').on('click', function () {
@@ -148,13 +191,13 @@ $(function () {
   });
 
   $('#btn-adicionar').on('click', function () {
-    formAttempted = true;
-    var basicValid = validateScope('basic', true);
+    touchAllRequired();
+    var basicValid = validateDadosBasicos(true);
     var tipo = getSelectedTipo();
-    var otherValid = tipo === 'insegura' ? validateScope('unsafe', true) : validateScope('safe', true);
+    var otherValid = tipo === 'insegura' ? validateAbaInsegura(true) : validateAbaSegura(true);
 
     updateTabsState();
-    updateAddButton();
+    updateAdicionarButton();
 
     if (basicValid && otherValid) {
       $modal.addClass('show');
@@ -169,5 +212,5 @@ $(function () {
   });
 
   updateTabsState();
-  updateAddButton();
+  updateAdicionarButton();
 });

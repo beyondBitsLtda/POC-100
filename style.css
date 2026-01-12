@@ -29,3 +29,12 @@ body {
 .badge-secondary {
   background-color: var(--wwin-secondary);
 }
+
+.wwin-header-bar {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
+.wwin-header-bar .wwin-title {
+  font-weight: 700;
+}
