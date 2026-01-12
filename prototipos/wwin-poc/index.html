@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POC - Wwin Safety</title>
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="assets/css/prototipo.css">
+</head>
+<body>
+  <div class="poc-wrapper">
+    <div class="card poc-modal">
+      <div class="card-header d-flex justify-content-between align-items-center wwin-header-bar">
+        <div class="d-flex align-items-center header-content">
+          <img src="../../logo.png" alt="Wwin Safety" class="header-logo">
+          <div>
+            <div class="poc-title wwin-title">Cadastro de POC – Wwin Safety</div>
+            <div class="small">Fluxo de observação e registro</div>
+          </div>
+        </div>
+        <span class="badge badge-secondary">Protótipo</span>
+      </div>
+      <div class="card-body">
+        <ul class="nav nav-tabs" id="pocTabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#tab-basicos" data-tab="basicos">Dados Básicos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tab-disabled" href="#tab-inseguras" data-tab="inseguras">Práticas / Condição Inseguras</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tab-disabled" href="#tab-seguras" data-tab="seguras">Reconhecimento de Prática Segura</a>
+          </li>
+        </ul>
+
+        <form id="poc-form" novalidate>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-basicos">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label class="required-label">Tipo de registro<span>*</span></label>
+                  <div class="inline-radio js-radio-group">
+                    <label>
+                      <input type="radio" name="tipo_registro" value="insegura" class="js-required" data-scope="basic" data-group="tipo_registro">
+                      Prática/Condição insegura
+                    </label>
+                    <label>
+                      <input type="radio" name="tipo_registro" value="segura" class="js-required" data-scope="basic" data-group="tipo_registro">
+                      Reconhecimento de prática segura
+                    </label>
+                  </div>
+                  <div class="invalid-feedback">Selecione o tipo de registro.</div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Unidade<span>*</span></label>
+                    <input type="text" class="form-control js-required" data-scope="basic" name="unidade" placeholder="Ex: Unidade Central">
+                    <div class="invalid-feedback">Informe a unidade.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Setor<span>*</span></label>
+                    <input type="text" class="form-control js-required" data-scope="basic" name="setor" placeholder="Ex: Produção">
+                    <div class="invalid-feedback">Informe o setor.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Subsetor<span>*</span></label>
+                    <input type="text" class="form-control js-required" data-scope="basic" name="subsetor" placeholder="Ex: Linha 2">
+                    <div class="invalid-feedback">Informe o subsetor.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Observador<span>*</span></label>
+                    <input type="text" class="form-control js-required" data-scope="basic" name="observador" placeholder="Ex: Maria Souza">
+                    <div class="invalid-feedback">Informe o observador.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Acompanhante</label>
+                    <input type="text" class="form-control" name="acompanhante" placeholder="Opcional">
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label class="required-label">Data<span>*</span></label>
+                    <input type="date" class="form-control js-required" data-scope="basic" name="data">
+                    <div class="invalid-feedback">Informe a data.</div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label class="required-label">Hora<span>*</span></label>
+                    <input type="time" class="form-control js-required" data-scope="basic" name="hora">
+                    <div class="invalid-feedback">Informe a hora.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Pessoas Observadas<span>*</span></label>
+                    <input type="number" min="1" class="form-control js-required" data-scope="basic" name="pessoas_observadas" placeholder="Ex: 3">
+                    <div class="invalid-feedback">Informe a quantidade observada.</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="required-label">Pessoas na Área<span>*</span></label>
+                    <input type="number" min="1" class="form-control js-required" data-scope="basic" name="pessoas_area" placeholder="Ex: 12">
+                    <div class="invalid-feedback">Informe a quantidade na área.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-inseguras">
+              <div class="row">
+                <div class="col-4">
+                  <div class="panel-title">Práticas</div>
+                  <div class="list-group" id="lista-praticas">
+                    <div class="list-group-item" data-value="A">A - Proteção coletiva</div>
+                    <div class="list-group-item" data-value="B">B - Equipamentos</div>
+                    <div class="list-group-item" data-value="C">C - Procedimentos</div>
+                    <div class="list-group-item" data-value="D">D - Organização</div>
+                    <div class="list-group-item" data-value="E">E - Comunicação</div>
+                    <div class="list-group-item" data-value="F">F - Ambiente</div>
+                  </div>
+                  <input type="hidden" id="praticaSelecionada" class="js-required" data-scope="unsafe" name="pratica_selecionada">
+                  <div class="invalid-feedback">Selecione uma prática.</div>
+                </div>
+                <div class="col-8">
+                  <div class="panel-title">Dados</div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label class="required-label">Categoria<span>*</span></label>
+                        <select class="form-control js-required" data-scope="unsafe" name="categoria">
+                          <option value="">Selecione</option>
+                          <option value="ato_inseguro">Ato inseguro</option>
+                          <option value="condicao_insegura">Condição insegura</option>
+                          <option value="outro">Outro</option>
+                        </select>
+                        <div class="invalid-feedback">Selecione a categoria.</div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label class="required-label">Subcategoria<span>*</span></label>
+                        <select class="form-control js-required" data-scope="unsafe" name="subcategoria">
+                          <option value="">Selecione</option>
+                          <option value="postura">Postura</option>
+                          <option value="epi">Uso de EPI</option>
+                          <option value="equipamento">Equipamento</option>
+                        </select>
+                        <div class="invalid-feedback">Selecione a subcategoria.</div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label class="required-label">Quem foi observado?<span>*</span></label>
+                        <select class="form-control js-required" data-scope="unsafe" name="observado">
+                          <option value="">Selecione</option>
+                          <option value="colaborador">Colaborador</option>
+                          <option value="terceiro">Terceiro</option>
+                          <option value="visitante">Visitante</option>
+                        </select>
+                        <div class="invalid-feedback">Informe quem foi observado.</div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label class="required-label">Quantidade<span>*</span></label>
+                        <input type="number" min="1" class="form-control js-required" data-scope="unsafe" name="quantidade" placeholder="Ex: 1">
+                        <div class="invalid-feedback">Informe a quantidade.</div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label class="required-label">Prática Insegura<span>*</span></label>
+                        <textarea class="form-control js-required" data-scope="unsafe" name="pratica_insegura" placeholder="Descreva a prática observada"></textarea>
+                        <div class="invalid-feedback">Descreva a prática insegura.</div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label class="required-label">Ação Recomendada<span>*</span></label>
+                        <textarea class="form-control js-required" data-scope="unsafe" name="acao_recomendada" placeholder="Indique a ação recomendada"></textarea>
+                        <div class="invalid-feedback">Informe a ação recomendada.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-seguras">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="required-label">Reconhecimento do Trabalho Seguro<span>*</span></label>
+                    <textarea class="form-control js-required" data-scope="safe" name="reconhecimento" placeholder="Descreva a prática segura observada"></textarea>
+                    <div class="invalid-feedback">Informe o reconhecimento do trabalho seguro.</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Observação</label>
+                    <textarea class="form-control" name="observacao" placeholder="Opcional"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-actions mt-4">
+            <button type="button" class="btn btn-outline-secondary" id="btn-cancelar">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btn-adicionar" disabled>Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-sucesso" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong>Sucesso</strong>
+          <button class="close" type="button" aria-label="Fechar">&times;</button>
+        </div>
+        <div class="modal-body">
+          POC adicionada com sucesso (simulação).
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="btn-fechar-modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/prototipo.js"></script>
+</body>
+</html>

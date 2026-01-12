@@ -1,0 +1,271 @@
+/* Minimal Bootstrap-like styles for offline prototype */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+[class^="col-"] {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.col-12 { width: 100%; }
+.col-8 { width: 66.6667%; }
+.col-4 { width: 33.3333%; }
+.col-6 { width: 50%; }
+
+.d-flex { display: flex; }
+.justify-content-between { justify-content: space-between; }
+.justify-content-end { justify-content: flex-end; }
+.align-items-center { align-items: center; }
+
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 16px; }
+.mb-4 { margin-bottom: 24px; }
+.mt-3 { margin-top: 16px; }
+.mt-4 { margin-top: 24px; }
+
+.card {
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e4e8;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group { margin-bottom: 16px; }
+
+label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cfd4da;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #7aa6ff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+textarea.form-control {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-outline-secondary {
+  background: #fff;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-primary {
+  background: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 16px 0;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-item {
+  margin-bottom: -1px;
+}
+
+.nav-tabs .nav-link {
+  display: block;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+.nav-tabs .nav-link.active {
+  background: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+  color: #1f4b99;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.list-group {
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.list-group-item {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e1e4e8;
+  cursor: pointer;
+  background: #fff;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.list-group-item.active {
+  background: #e9f0ff;
+  color: #1f4b99;
+  font-weight: 600;
+}
+
+.invalid-feedback {
+  display: none;
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.is-invalid {
+  border-color: #d9534f;
+}
+
+.is-invalid + .invalid-feedback,
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog {
+  max-width: 480px;
+  width: 100%;
+  margin: 16px;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.modal-header,
+.modal-footer {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-footer {
+  border-top: 1px solid #e1e4e8;
+  border-bottom: none;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.badge-secondary {
+  background: #6c757d;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.small { font-size: 12px; }
