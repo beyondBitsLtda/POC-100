@@ -1,8 +1,17 @@
 :root {
-  --wwin-primary: #1f4b99;
+  --cor-primaria: #CB0F10;
+  --cor-cinza-fundo: #f0f0f0;
+  --cor-texto-escuro: #212529;
+  --cor-texto-claro: #495057;
+  --cor-botao-secundario: #6c757d;
+  --cor-aviso: #ffc107;
+  --cor-status-aprovado: #28a745;
+  --cor-status-reprovado: #dc3545;
+  --cor-status-invalido: #6c757d;
+  --wwin-primary: var(--cor-primaria);
   --wwin-secondary: #0f7b6c;
-  --wwin-bg: #f4f6f9;
-  --wwin-text: #2c2f33;
+  --wwin-bg: var(--cor-cinza-fundo);
+  --wwin-text: var(--cor-texto-escuro);
 }
 
 body {
@@ -22,8 +31,8 @@ body {
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: var(--cor-botao-secundario);
+  border-color: var(--cor-botao-secundario);
 }
 
 .badge-secondary {
@@ -31,7 +40,7 @@ body {
 }
 
 .wwin-header-bar {
-  background-color: #b71c1c;
+  background-color: var(--cor-primaria);
   color: #fff;
 }
 
