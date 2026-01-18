@@ -1,8 +1,23 @@
-# Protótipo Wwin Safety – POC (Vanilla)
+# Protótipo POC Wwin Safety (Vanilla)
 
-Esta é a versão do protótipo do módulo **Cadastro/Consulta de POC – Wwin Safety** feita totalmente em JavaScript puro, sem Bootstrap, sem jQuery e sem dependências externas.
+Abra `prototipos/wwin-poc-vanilla/index.html` no navegador.
 
-## Como usar
+Não requer servidor.
 
-1. Abra o arquivo `prototipos/wwin-poc-vanilla/index.html` diretamente no navegador.
-2. Não é necessário servidor ou conexão com a internet.
+## Cascata Unidade → Setor → Subsetor
+
+Inclua o script e use os IDs esperados no formulário de Cadastro Básico:
+
+```html
+<select id="unidade" required>
+  <option value="">Selecione</option>
+</select>
+<select id="setor" required>
+  <option value="">Selecione</option>
+</select>
+<select id="subsetor" required>
+  <option value="">Selecione</option>
+</select>
+
+<script src="assets/js/cascata-unidade-setor-subsetor.js"></script>
+```
