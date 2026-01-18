@@ -21,7 +21,6 @@ const basicFields = [
 ];
 
 const unsafeFields = [
-  document.getElementById('categoria'),
   document.getElementById('subcategoria'),
   document.getElementById('observado'),
   document.getElementById('quantidade'),

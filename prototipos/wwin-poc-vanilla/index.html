@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wwin Safety – POC</title>
-  <link rel="stylesheet" href="../../style.css" />
-  <link rel="stylesheet" href="assets/css/app.css" />
+  <title>POC - 100</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="app-header">
     <div class="container header-content">
-      <img src="../../logo.png" alt="Logo Wwin Safety" class="logo" />
-      <div>
-        <p class="app-eyebrow">Wwin Safety</p>
-        <h1>Wwin Safety – POC</h1>
+      <img src="assets/css/logo.png" alt="Logo Wwin Safety" class="logo" />
+      <divc class="header-title">
+        <h1>P.O.C 100</h1>
       </div>
     </div>
   </header>
@@ -36,19 +37,67 @@
           <h2>Dados Básicos</h2>
           <div class="form-grid">
             <label><strong>Unidade*</strong>
-              <input type="text" id="unidade" required />
+              <select id="unidade" required>
+                <option value="">Selecione</option>
+                <option value="vespasiano">Vespasiano</option>
+                <option value="portoacu">Porto Açu</option>
+                <option value="contagem">Contagem</option>
+              </select>
             </label>
             <label><strong>Setor*</strong>
-              <input type="text" id="setor" required />
+              <select id="setor" required>
+                  <option value="">Selecione</option>
+                  <option value="administrativo">Administrativo</option>
+                  <option value="caldeiraria">Caldeiraria</option>
+                  <option value="montagem">Montagem</option>
+                  <option value="usinagem">Usinagem</option>
+                  <option value="manutencao">Manutenção</option>
+              </select>
             </label>
             <label><strong>Subsetor*</strong>
-              <input type="text" id="subsetor" required />
+              <select id="subsetor" required>
+                <option value="">Selecione</option>
+                <option value="fiscal">Fiscal</option>
+                <option value="financeiro">Financeiro</option>
+                <option value="gg">GG</option>
+                <option value="inovacao">Inovação</option>
+                <option value="ti">TI</option>
+                <option value="facilities">Facilities</option>
+                <option value="almoxarifado">Almoxarifado</option>
+                <option value="ems">EMS</option>
+                <option value="pcp">PCP</option>
+                <option value="ambulatorio">Ambulatório</option>
+              </select>
             </label>
             <label><strong>Observador*</strong>
-              <input type="text" id="observador" required />
+              <select id="observador" required>
+                <option value="">Selecione</option>
+                <option value="davi">Davi</option>
+                <option value="brayan">Brayan</option>
+                <option value="samuel">Samuel</option>
+                <option value="lucas">Lucas</option>
+                <option value="walef">Walef</option>
+                <option value="welington">Welington</option>
+                <option value="eder">Eder</option>
+                <option value="guilherme">Guilherme</option>
+                <option value="humberto">Humberto</option>
+                <option value="wagner">Wagner</option>
+              </select>
             </label>
             <label>Acompanhante
-              <input type="text" id="acompanhante" />
+              <select id="acompanhante">
+                <option value="">Selecione</option>
+                <option value="davi">Davi</option>
+                <option value="brayan">Brayan</option>
+                <option value="samuel">Samuel</option>
+                <option value="lucas">Lucas</option>
+                <option value="walef">Walef</option>
+                <option value="welington">Welington</option>
+                <option value="eder">Eder</option>
+                <option value="guilherme">Guilherme</option>
+                <option value="humberto">Humberto</option>
+                <option value="wagner">Wagner</option>
+              </select>
             </label>
             <label><strong>Data*</strong>
               <input type="date" id="data" required />
@@ -83,24 +132,16 @@
             <div class="unsafe-practices">
               <p><strong>Prática (A-F)*</strong></p>
               <ul class="practice-list" id="practice-list">
-                <li data-practice="A">Prática A</li>
-                <li data-practice="B">Prática B</li>
-                <li data-practice="C">Prática C</li>
-                <li data-practice="D">Prática D</li>
-                <li data-practice="E">Prática E</li>
-                <li data-practice="F">Prática F</li>
+                <li data-practice="A">Reação das Pessoas</li>
+                <li data-practice="B">Posição das Pessoas</li>
+                <li data-practice="C">EPIs</li>
+                <li data-practice="D">Ferramentas e Equipamentos</li>
+                <li data-practice="E">Procedimentos</li>
+                <li data-practice="F">Ordem, Limpeza e Organização</li>
               </ul>
               <input type="hidden" id="practice-selected" required />
             </div>
             <div class="unsafe-fields">
-              <label><strong>Categoria*</strong>
-                <select id="categoria" required>
-                  <option value="">Selecione</option>
-                  <option value="condicao-insegura">Condição Insegura</option>
-                  <option value="procedimento">Procedimento</option>
-                  <option value="comportamento">Comportamento</option>
-                </select>
-              </label>
               <label><strong>Subcategoria*</strong>
                 <select id="subcategoria" required>
                   <option value="">Selecione</option>
@@ -150,21 +191,69 @@
       <div class="consultar">
         <h2>Consultar POC</h2>
         <div class="form-grid">
-          <label>Unidade
-            <input type="text" id="filtro-unidade" />
-          </label>
-          <label>Setor
-            <input type="text" id="filtro-setor" />
-          </label>
-          <label>Subsetor
-            <input type="text" id="filtro-subsetor" />
-          </label>
-          <label>Observador
-            <input type="text" id="filtro-observador" />
-          </label>
-          <label>Acompanhante
-            <input type="text" id="filtro-acompanhante" />
-          </label>
+          <label><strong>Unidade*</strong>
+              <select id="unidade" required>
+                <option value="">Selecione</option>
+                <option value="vespasiano">Vespasiano</option>
+                <option value="portoacu">Porto Açu</option>
+                <option value="contagem">Contagem</option>
+              </select>
+            </label>
+            <label><strong>Setor*</strong>
+              <select id="setor" required>
+                  <option value="">Selecione</option>
+                  <option value="administrativo">Administrativo</option>
+                  <option value="caldeiraria">Caldeiraria</option>
+                  <option value="montagem">Montagem</option>
+                  <option value="usinagem">Usinagem</option>
+                  <option value="manutencao">Manutenção</option>
+              </select>
+            </label>
+            <label><strong>Subsetor*</strong>
+              <select id="subsetor" required>
+                <option value="">Selecione</option>
+                <option value="fiscal">Fiscal</option>
+                <option value="financeiro">Financeiro</option>
+                <option value="gg">GG</option>
+                <option value="inovacao">Inovação</option>
+                <option value="ti">TI</option>
+                <option value="facilities">Facilities</option>
+                <option value="almoxarifado">Almoxarifado</option>
+                <option value="ems">EMS</option>
+                <option value="pcp">PCP</option>
+                <option value="ambulatorio">Ambulatório</option>
+              </select>
+            </label>
+            <label><strong>Observador*</strong>
+              <select id="observador" required>
+                <option value="">Selecione</option>
+                <option value="davi">Davi</option>
+                <option value="brayan">Brayan</option>
+                <option value="samuel">Samuel</option>
+                <option value="lucas">Lucas</option>
+                <option value="walef">Walef</option>
+                <option value="welington">Welington</option>
+                <option value="eder">Eder</option>
+                <option value="guilherme">Guilherme</option>
+                <option value="humberto">Humberto</option>
+                <option value="wagner">Wagner</option>
+              </select>
+            </label>
+            <label>Acompanhante
+              <select id="acompanhante">
+                <option value="">Selecione</option>
+                <option value="davi">Davi</option>
+                <option value="brayan">Brayan</option>
+                <option value="samuel">Samuel</option>
+                <option value="lucas">Lucas</option>
+                <option value="walef">Walef</option>
+                <option value="welington">Welington</option>
+                <option value="eder">Eder</option>
+                <option value="guilherme">Guilherme</option>
+                <option value="humberto">Humberto</option>
+                <option value="wagner">Wagner</option>
+              </select>
+            </label>
           <label>Data início
             <input type="date" id="filtro-data-inicio" />
           </label>
